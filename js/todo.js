@@ -2,6 +2,15 @@ const toDoForm = document.getElementById("todo-form");
 const toDoInput = document.querySelector("#todo-form input");
 const toDoList = document.getElementById("todo-list");
 
+const toDos = [];
+
+//toDos array의 내용을 localStorage에 저장
+function saveToDos() {
+  localStorage.setItem("todos", JSON.stringify(toDos));
+  // input에 입력한 todo value를 localStorage에 저장할 때 ['a', 'b', 'c']와 같은 array의 형태로 저장하기 위해서
+  // JSON.stringify()를 사용하여 string으로 바꿔서 localStorage에 넣어줌.
+}
+
 //Todo list 삭제 버튼 이벤트
 function deleteTodo(event) {
   const li = event.target.parentElement; //target은 클릭된 HTML element.
@@ -25,7 +34,9 @@ function handleToDoSubmit(event) {
   event.preventDefault();
   const newTodo = toDoInput.value; //input의 현재 value를 새로운 변수에 복사
   toDoInput.value = "";
+  toDos.push(newTodo);
   paintTodo(newTodo);
+  saveToDos();
 }
 
 toDoForm.addEventListener("submit", handleToDoSubmit);
