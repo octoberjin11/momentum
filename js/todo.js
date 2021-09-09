@@ -18,6 +18,14 @@ function saveToDos() {
 function deleteTodo(event) {
   const li = event.target.parentElement; //target은 클릭된 HTML element.
   li.remove();
+
+  toDos = toDos.filter((toDo) => toDo.id !== parseInt(li.id));
+  //filter 함수를 사용해서 지우고 싶은 item을 제외한 새 array를 만든다.
+  //내가 클릭한 li.id와 다른 toDo는 남겨두자.
+  //toDo.id 타입은 number, li.id 타입은 string이므로 !== 비교 연산을 사용할 수 없다.
+  //그래서 parseInt()을 사용해서 li.id를 문자열을 숫자로 바꿔준다.
+
+  saveToDos();
 }
 
 //Todo list 추가
