@@ -1,8 +1,7 @@
-const maxNumberInput = document.querySelector("#max-number-form input");
-const guessNumberInput = document.querySelector("#guess-number-form input");
-const playButton = document.querySelector("#guess-number-form button");
-const guessScore = document.querySelector("#guess-score");
-const gameResult = document.querySelector("#game-result");
+const playForm = document.querySelector("#random-play");
+const maxInput = document.querySelector("#max-number-form input");
+const guessInput = document.querySelector("#guess-number-form input");
+const gameResult = document.querySelector("#js-result");
 
 const LOST_TXT = "You lost!";
 const WON_TXT = "You Won!";
@@ -10,33 +9,17 @@ const WON_TXT = "You Won!";
 function onPlayButtonClick(event) {
   event.preventDefault();
 
-  const maxValue = maxNumberInput.value;
-  const guessValue = guessNumberInput.value;
-  const maxNumber = parseInt(maxValue);
-  const guessNumber = parseInt(guessValue);
+  const maxNumber = parseInt(maxInput.value, 10);
+  const guessNumber = parseInt(guessInput.value, 10);
   const randomNumber = Math.ceil(Math.random() * maxNumber);
 
-  if (maxValue === "") {
-    alert("Please write Max number.");
-    maxNumberInput.focus();
-  } else if (guessValue === "") {
-    alert("Please write Guess number.");
-    guessNumberInput.focus();
+  if (maxNumber < guessNumber) {
+    alert("Guess number is less than Generate max number.");
   } else {
-    if (maxNumber < 0) {
-      alert("The range cannot contain negative numbers.");
-    } else if (maxNumber < guessNumber) {
-      alert("Guess number is less than Generate max number.");
-    } else {
-      guessScore.innerText = `You chose : ${guessValue}, the machine chose : ${randomNumber}.`;
-
-      if (randomNumber === guessNumber) {
-        gameResult.innerText = WON_TXT;
-      } else {
-        gameResult.innerText = LOST_TXT;
-      }
-    }
+    gameResult.innerHTML = `<p>You chose : ${guessNumber}, the machine chose : ${randomNumber}.</p><br/><strong>${
+      randomNumber === guessNumber ? WON_TXT : LOST_TXT
+    }</strong>`;
   }
 }
 
-playButton.addEventListener("click", onPlayButtonClick);
+playForm.addEventListener("submit", onPlayButtonClick);
