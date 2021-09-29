@@ -7,19 +7,18 @@
 
   <body>
     <h1>Random Number Game</h1>
-    <form>
+    <form id="random-play">
       <div id="max-number-form">
         <strong>Generate a number between 0 and</strong>
-        <input type="number" name="" id="" min="0" />
+        <input type="number" name="" id="" min="0" required />
       </div>
       <div id="guess-number-form">
         <span>Guess the number : </span>
-        <input type="number" name="" id="" min="0" />
-        <button type="button">Play!</button>
+        <input type="number" name="" id="" min="0" required />
+        <button>Play!</button>
       </div>
     </form>
-    <p id="guess-score"></p>
-    <strong id="game-result"></strong>
+    <div id="js-result"></div>
     <script src="src/index.js"></script>
   </body>
 </html>
