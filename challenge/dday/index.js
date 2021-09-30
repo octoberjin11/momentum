@@ -1,19 +1,28 @@
 const clockTitle = document.querySelector(".js-clock");
 
 function getClock() {
-  const date = new Date();
+  const now = new Date();
 
-  const christmasTime = new Date("Dec 24,2021,00:00:00");
+  //크리스마스 날짜 얻기 위한 코드
+  const xmasDay = new Date(`${new Date().getFullYear()}-12-25:00:00:00+0900`);
 
-  const dday = christmasTime - date;
+  const dday = new Date(xmasDay - now);
 
-  const days = String(Math.floor(dday / 1000 / 60 / 60 / 24)).padStart(2, 0);
-  const hours = String(Math.floor(dday / 1000 / 60 / 60) % 24).padStart(2, 0);
-  const minutes = String(Math.floor((dday / 1000 / 60) % 60)).padStart(2, 0);
-  const seconds = String(Math.floor((dday / 1000) % 60)).padStart(2, 0);
+  const secondsInMs = Math.floor(dday / 1000);
+  const minutesInMs = Math.floor(secondsInMs / 60);
+  const hoursInMs = Math.floor(minutesInMs / 60);
+  const days = Math.floor(hoursInMs / 24);
 
-  const dDayInfo = `${days}d ${hours}h ${minutes}m ${seconds}s`;
-  clockTitle.innerText = dDayInfo;
+  const seconds = secondsInMs % 60;
+  const minutes = minutesInMs % 60;
+  const hours = hoursInMs % 24;
+
+  const daysStr = `${days < 10 ? `0${days}` : days}d`;
+  const hoursStr = `${hours < 10 ? `0${hours}` : hours}h`;
+  const minutesStr = `${minutes < 10 ? `0${minutes}` : minutes}m`;
+  const secondsStr = `${seconds < 10 ? `0${seconds}` : seconds}s`;
+
+  clockTitle.innerHTML = `${daysStr} ${hoursStr} ${minutesStr} ${secondsStr}`;
 }
 
 getClock();
