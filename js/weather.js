@@ -1,8 +1,9 @@
+const weatherIcon = document.querySelector("#weatherIcon");
 const API_KEY = "b6d5aaeed43a9634960372dbc4f04d18";
 
 function onGeoOk(position) {
   //위치를 얻는 데 성공했을 때
-  //sucess 함수는 GeolocationPosition object 하나를 파라미터로 입력 받는다.
+  //success 함수는 GeolocationPosition object 하나를 파라미터로 입력 받는다.
   //console.log(position);
 
   const lat = position.coords.latitude;
@@ -15,6 +16,9 @@ function onGeoOk(position) {
     .then((data) => {
       const weather = document.querySelector("#weather .weather_info");
       const city = document.querySelector("#weather .location");
+      const icon = data.weather[0].icon;
+      console.log(icon);
+      weatherIcon.src = `http://openweathermap.org/img/wn/${icon}@2x.png`;
       city.innerText = data.name;
       weather.innerText = `${data.weather[0].main} / ${Math.round(
         data.main.temp

@@ -184,9 +184,15 @@ body {
   right: 10px;
   top: 10px;
   text-align: center;
+  #weatherIcon {
+    display: inline-block;
+    width: 50px;
+    margin-top: -5px;
+    vertical-align: middle;
+  }
   .location {
     display: block;
-    margin-top: 5px;
+    margin-top: -10px;
     font-size: 1.2rem;
   }
 }
